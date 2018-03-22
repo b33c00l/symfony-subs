@@ -2,12 +2,24 @@
 
 namespace App\Entity;
 
+use Symfony\Component\Validator\Constraints as Assert;
+
 class Subscribtion
 {	
+    /**
+     * @Assert\NotBlank()
+     */
     private $user;
 
+    /**
+     * @Assert\NotBlank()
+     * @Assert\Email
+     */
     private $email;
 
+    /**
+     * @Assert\NotBlank()
+     */
     private $categories = [];
 
     private $date;
