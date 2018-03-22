@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+{% block title %}Categories List{% endblock %}
+{% block body %}
+	<div class="container">
+		<div class="row justify-content-end mt-1">
+			<a class="btn btn-success mr-1" href="{{path('categories/create')}}">Add category</a>
+			<a class="btn btn-primary mr-1" href="{{path('subscribers')}}">Subscribers</a>
+			<a class="btn btn-primary" href="{{path('logout')}}">Logout</a>
+		</div>
+		<div>
+			<h2 class="text-center">Categories List</h2>
+		</div>
+		<table id="categories" class="table table-striped">
+			<thead class="thead-dark">
+				<tr>
+					<th>ID</th>
+					<th>Name</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for category in categories %}
+					<tr>
+						<td>{{ category.id }}</td>
+						<td>{{ category.value }}</td>
+					</tr>
+				{% else %}
+					<option>No file found</option>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+{% endblock %}
+{% block javascripts %}
+	<script type="text/javascript">
+	$(document).ready( function () {
+	$('#categories').DataTable({
+		"order": [[0,'desc']]
+		});
+	});
+	</script>
+{% endblock %}
