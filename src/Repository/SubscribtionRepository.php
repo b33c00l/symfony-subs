@@ -93,16 +93,16 @@ class SubscribtionRepository
 
     protected function toArray($subscribtion)
     {   
-        $categories = "";
+        $categories = [];
         foreach ($subscribtion->getCategories() as $category) {
-            $categories .= $category->getId() ." ";
+            $categories[] = $category->getId();
         }
 
         return 
         [
             $subscribtion->getUser(), 
             $subscribtion->getEmail(),
-            $categories,
+            json_encode($categories),
             $subscribtion->getDate()->format($this->dateFormat)
         ];
     }
@@ -113,7 +113,7 @@ class SubscribtionRepository
         $object->setId($id);
         $object->setUser($row[0]);
         $object->setEmail($row[1]);
-        $categories = explode(" ", $row[2]);
+        $categories = json_decode($row[2], true);
         foreach ($categories as $categoryId) {
             $category = $this->categoryRepository->find($categoryId);
             if($category != null)
