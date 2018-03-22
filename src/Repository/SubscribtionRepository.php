@@ -31,6 +31,10 @@ class SubscribtionRepository
     public function findAll() 
     {
         $filename = $this->filename;
+        if (!is_file($filename))
+        {
+            return [];
+        }
         $file = fopen($filename, 'r');
         $subscribers = [];
         $i = -1;

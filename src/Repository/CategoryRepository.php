@@ -24,6 +24,10 @@ class CategoryRepository
     public function findAll()
     {
         $filename = $this->filename;
+        if (!is_file($filename))
+        {
+            return [];
+        }
         $file = fopen($filename, 'r');
         $categories = [];
         while(! feof($file))
